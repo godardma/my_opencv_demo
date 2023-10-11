@@ -56,8 +56,8 @@ private:
     cv::Mat dstImage_bis = cv::Mat::zeros(dst_blur.size(), dst_blur.type());    
 
 
-    inRange(fullImageHSV, Scalar(150, 140, 120), Scalar(360, 360, 360), dstImage);
-    inRange(fullImageHSV, Scalar(0, 120, 120), Scalar(45, 360, 360), dstImage_bis);
+    inRange(fullImageHSV, Scalar(150, 40, 40), Scalar(360, 360, 360), dstImage);
+    inRange(fullImageHSV, Scalar(0, 40, 40), Scalar(45, 360, 360), dstImage_bis);
     dstImage=dstImage+dstImage_bis;
 
     int morph_size = 3; 
@@ -106,7 +106,7 @@ private:
     // if (i<300){video.write(destin);i++;}
     // else if (i==300){video.release();cout<<"FINIIIIIIIIIIIIIIII"<<endl;}
     
-    // cv::imshow("closed", destin );
+    cv::imshow("closed", openedImage );
     char c=(char)cv::waitKey(25);
 
   }
