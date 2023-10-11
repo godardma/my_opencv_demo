@@ -56,8 +56,8 @@ private:
     cv::Mat dstImage_bis = cv::Mat::zeros(dst_blur.size(), dst_blur.type());    
 
 
-    inRange(fullImageHSV, Scalar(150, 40, 40), Scalar(360, 360, 360), dstImage);
-    inRange(fullImageHSV, Scalar(0, 40, 40), Scalar(45, 360, 360), dstImage_bis);
+    inRange(fullImageHSV, Scalar(150, 120, 40), Scalar(360, 360, 360), dstImage);
+    inRange(fullImageHSV, Scalar(0, 120, 40), Scalar(30, 360, 360), dstImage_bis);
     dstImage=dstImage+dstImage_bis;
 
     int morph_size = 3; 
