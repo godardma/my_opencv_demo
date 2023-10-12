@@ -11,7 +11,7 @@ using namespace std::chrono_literals;
 using namespace std;
 using namespace cv;
 RNG rng(12345);
-// VideoWriter video("outcpp.avi",VideoWriter::fourcc('M','J','P','G'),10, Size(680,480));
+// VideoWriter video("video_10_11_1.avi",VideoWriter::fourcc('M','J','P','G'),10, Size(680,480));
 int i=0;
 class MinimalImageSubscriber : public rclcpp::Node {
 public:
@@ -103,8 +103,8 @@ private:
     cv::imshow("source", dst );
     Mat destin = Mat::zeros(dst.size(), dst.type());    
     dst.copyTo(destin, openedImage);
-    // if (i<300){video.write(destin);i++;}
-    // else if (i==300){video.release();cout<<"FINIIIIIIIIIIIIIIII"<<endl;}
+    // if (i<104){video.write(destin);i++;cout<<i<<endl;}
+    // else if (i==104){video.release();cout<<"FINIIIIIIIIIIIIIIII"<<endl;}
     
     cv::imshow("closed", openedImage );
     char c=(char)cv::waitKey(25);
