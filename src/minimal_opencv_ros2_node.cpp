@@ -11,7 +11,7 @@ using namespace std::chrono_literals;
 using namespace std;
 using namespace cv;
 RNG rng(12345);
-VideoWriter video("ellipse_selection3.avi",VideoWriter::fourcc('M','J','P','G'),10, Size(680,480));
+// VideoWriter video("ellipse_selection3.avi",VideoWriter::fourcc('M','J','P','G'),10, Size(680,480));
 int i=0;
 
 // the median 
@@ -213,7 +213,7 @@ private:
       auto mid_j=findMedian(vec_j,vec_j.size());
       Point pt = Point(mid_j, mid_i);
       
-      // circle( dst, pt, 4, color_pink, 2 );
+      circle( dst, pt, 4, color_pink, 2 );
       // cout<<"MID"<<mid_i<<" "<<mid_j<<endl;
     }
     closedImage.convertTo(closedImage, CV_8U);
@@ -222,10 +222,10 @@ private:
     cv::imshow("source", dst );
     // cv::imshow("mask", mask );
     // cv::imshow("closedImage", closedImage );
-    Mat destin = Mat::zeros(dst.size(), dst.type());    
-    dst.copyTo(destin, closedImage);
-    if (i<150){video.write(destin);i++;cout<<i<<endl;}
-    else if (i==150){video.release();cout<<"FINIIIIIIIIIIIIIIII"<<endl;}
+    // Mat destin = Mat::zeros(dst.size(), dst.type());    
+    // dst.copyTo(destin, closedImage);
+    // if (i<150){video.write(destin);i++;cout<<i<<endl;}
+    // else if (i==150){video.release();cout<<"FINIIIIIIIIIIIIIIII"<<endl;}
     
     // cv::imshow("closed", openedImage );
     char c=(char)cv::waitKey(25);
