@@ -11,7 +11,7 @@ using namespace std::chrono_literals;
 using namespace std;
 using namespace cv;
 RNG rng(12345);
-// VideoWriter video("test_tps_reel.avi",VideoWriter::fourcc('M','J','P','G'),10, Size(680,480));
+VideoWriter video("ellipse_selection3.avi",VideoWriter::fourcc('M','J','P','G'),10, Size(680,480));
 int i=0;
 
 // the median 
@@ -128,7 +128,7 @@ private:
           vec_i.insert(vec_i.end(),i);
           vec_j.insert(vec_j.end(),j);
         }
-        mask.at<double>(i,j)=boo;
+        mask.at<double>(i,j)=255*boo;
         
       }
     }
@@ -200,9 +200,12 @@ private:
         Point(morph_size, morph_size)); 
   
     // Closing 
-    cv::Mat closedImage = cv::Mat::zeros(dst.size(), dst.type()); 
+    cv::Mat closedImage = cv::Mat::zeros(dst.size(),  CV_8UC1); 
     morphologyEx(mask, closedImage, 
                  MORPH_CLOSE, element, 
+                 Point(-1, -1), 2);
+     morphologyEx(closedImage, closedImage, 
+                 MORPH_DILATE, element, 
                  Point(-1, -1), 2);
     Scalar color_pink = Scalar( 0,255,0 );
     if (vec_i.size()!=0){
@@ -210,18 +213,19 @@ private:
       auto mid_j=findMedian(vec_j,vec_j.size());
       Point pt = Point(mid_j, mid_i);
       
-      circle( dst, pt, 4, color_pink, 2 );
+      // circle( dst, pt, 4, color_pink, 2 );
       // cout<<"MID"<<mid_i<<" "<<mid_j<<endl;
     }
-    
+    closedImage.convertTo(closedImage, CV_8U);
 
     
     cv::imshow("source", dst );
-    cv::imshow("mask", closedImage );
-    // Mat destin = Mat::zeros(dst.size(), dst.type());    
-    // dst.copyTo(destin, openedImage);
-    // if (i<104){video.write(dst);i++;cout<<i<<endl;}
-    // else if (i==104){video.release();cout<<"FINIIIIIIIIIIIIIIII"<<endl;}
+    // cv::imshow("mask", mask );
+    // cv::imshow("closedImage", closedImage );
+    Mat destin = Mat::zeros(dst.size(), dst.type());    
+    dst.copyTo(destin, closedImage);
+    if (i<150){video.write(destin);i++;cout<<i<<endl;}
+    else if (i==150){video.release();cout<<"FINIIIIIIIIIIIIIIII"<<endl;}
     
     // cv::imshow("closed", openedImage );
     char c=(char)cv::waitKey(25);
