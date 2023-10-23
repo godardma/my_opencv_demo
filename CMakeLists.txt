@@ -10,6 +10,7 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
 find_package(cv_bridge REQUIRED)
 find_package(image_transport REQUIRED)
 find_package(OpenCV REQUIRED)
@@ -26,11 +27,11 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-add_executable(minimal_opencv_ros2_node src/minimal_opencv_ros2_node.cpp)
-ament_target_dependencies(minimal_opencv_ros2_node rclcpp std_msgs sensor_msgs cv_bridge image_transport OpenCV)
+add_executable(camera_node src/minimal_opencv_ros2_node.cpp)
+ament_target_dependencies(camera_node rclcpp std_msgs sensor_msgs cv_bridge image_transport OpenCV geometry_msgs)
 
 install(TARGETS
-   minimal_opencv_ros2_node
+   camera_node
    DESTINATION lib/${PROJECT_NAME}
  )
 
