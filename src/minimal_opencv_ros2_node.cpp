@@ -123,6 +123,7 @@ private:
     cvtColor(dst_blur, fullImageHSV, CV_BGR2HSV);
     cv::Mat mask = cv::Mat::zeros(dst_blur.size(), CV_64FC1);
     vector<int> vec_i,vec_j;
+
     for (int i=0;i<fullImageHSV.rows;i=i+3){
       for (int j=0;j<fullImageHSV.cols;j=j+3){
         auto hsv_elem = DoubleMatFromVec3b(fullImageHSV.at<Vec3b>(i,j));
